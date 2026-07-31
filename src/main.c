@@ -4,6 +4,7 @@
 #include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "nvs_flash.h"
 #include "homekit.h"
 
 #define RELAY_PIN   0
@@ -15,6 +16,7 @@ static const char *TAG = "smartplug";
 
 void init()
 {
+    // === Intialize GPIOs === //
     // Relay
     gpio_set_direction(RELAY_PIN, GPIO_MODE_OUTPUT);
 
@@ -24,6 +26,12 @@ void init()
     // Button
     gpio_set_direction(BTN_PIN, GPIO_MODE_INPUT);
     gpio_set_pull_mode(BTN_PIN, GPIO_PULLUP_ONLY);
+
+    ESP_LOGI(TAG, "GPIOs initialized");
+
+    // === Start Homekit === //
+    homekit_start();
+    ESP_LOGI(TAG, "Homekit initialized");
 }
 
 // pass 0 for LED off
@@ -59,6 +67,15 @@ int checkBtn()
 
 void app_main(void)
 {
+    ESP_LOGI(TAG, "Enter app_main");
+
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+
     init();
 
     int state = 0;
@@ -89,13 +106,11 @@ void app_main(void)
                 if (debouncedState == 1)
                 {
                     state = !state;
-                    setLED(state);      // LED toggle
-                    setRelay(state);    // Relay toggle
-                    ESP_LOGI(TAG, "toggled, state=%d", state);
+                    plug_set_on(state);
                 }
             }
         }
 
-        vTaskDelay(pdMS_TO_TICKS(5));
+        vTaskDelay(pdMS_TO_TICKS(20));
     }
 }

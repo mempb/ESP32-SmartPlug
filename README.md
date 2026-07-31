@@ -26,10 +26,6 @@ The ESP32-C3 connects directly to the home WiFi network and implements the HomeK
 ## Setup / Dependencies:
 
 - Install the `PlatformIO` extension in VSCode
-- Clone the `esp-homekit-sdk` repo:
-```
-git clone --recursive https://github.com/espressif/esp-homekit-sdk.git
-```
 
 ## Roadmap
 
@@ -37,7 +33,8 @@ git clone --recursive https://github.com/espressif/esp-homekit-sdk.git
 - [x] PCB layout and routing, order
 - [x] PCB assembly (hand soldering)
 - [X] GPIO firmware: button input, debounce, LED toggle
-- [ ] HomeKit firmware (esp-homekit-sdk integration, relay control, button + LED sync)
+- [X] HomeKit firmware (esp-homekit-sdk integration, relay control, button + LED sync)
+- [ ] Respin PCB, order
 - [ ] Enclosure design/print
 - [ ] Final writeup: build photos, schematics, wiring diagram, etc
 

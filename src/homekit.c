@@ -3,18 +3,14 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <esp_log.h>
-
 #include <hap.h>
 #include <hap_apple_servs.h>
 #include <hap_apple_chars.h>
 #include <hap_fw_upgrade.h>
-
 #include <iot_button.h>
-
 #include <app_wifi.h>
 #include <app_hap_setup_payload.h>
-
-#include "plug.h"
+#include <homekit.h>
 
 static const char *TAG = "ESP32-SmartPlug";
 
@@ -22,14 +18,10 @@ static const char *TAG = "ESP32-SmartPlug";
 #define PLUG_TASK_STACKSIZE 4 * 1024
 #define PLUG_TASK_NAME      "hap_plug"
 
-/* Reset network credentials if button is pressed for more than 3 seconds and then released */
 #define RESET_NETWORK_BUTTON_TIMEOUT        3
-
-/* Reset to factory if button is pressed and held for more than 10 seconds */
 #define RESET_TO_FACTORY_BUTTON_TIMEOUT     10
+#define RESET_GPIO  GPIO_NUM_10
 
-/* The button "Boot" will be used as the Reset button for the example */
-#define RESET_GPIO  GPIO_NUM_0
 /**
  * @brief The network reset button callback handler.
  * Useful for testing the Wi-Fi re-configuration feature of WAC2
@@ -158,6 +150,7 @@ static void plug_thread_entry(void *arg)
 
     /* Add the Accessory to the HomeKit Database */
     hap_add_accessory(accessory);
+    ESP_LOGI(TAG, "reached point add");
 
     /* Initialize the plug Hardware */
     plug_init();
@@ -166,30 +159,9 @@ static void plug_thread_entry(void *arg)
      */
     reset_key_init(RESET_GPIO);
 
-    /* TODO: Do the actual hardware initialization here */
-
-    /* For production accessories, the setup code shouldn't be programmed on to
-     * the device. Instead, the setup info, derived from the setup code must
-     * be used. Use the factory_nvs_gen utility to generate this data and then
-     * flash it into the factory NVS partition.
-     *
-     * By default, the setup ID and setup info will be read from the factory_nvs
-     * Flash partition and so, is not required to set here explicitly.
-     *
-     * However, for testing purpose, this can be overridden by using hap_set_setup_code()
-     * and hap_set_setup_id() APIs, as has been done here.
-     */
-#ifdef CONFIG_EXAMPLE_USE_HARDCODED_SETUP_CODE
-    /* Unique Setup code of the format xxx-xx-xxx. Default: 111-22-333 */
-    hap_set_setup_code(CONFIG_EXAMPLE_SETUP_CODE);
-    /* Unique four character Setup Id. Default: ES32 */
-    hap_set_setup_id(CONFIG_EXAMPLE_SETUP_ID);
-#ifdef CONFIG_APP_WIFI_USE_WAC_PROVISIONING
-    app_hap_setup_payload(CONFIG_EXAMPLE_SETUP_CODE, CONFIG_EXAMPLE_SETUP_ID, true, cfg.cid);
-#else
-    app_hap_setup_payload(CONFIG_EXAMPLE_SETUP_CODE, CONFIG_EXAMPLE_SETUP_ID, false, cfg.cid);
-#endif
-#endif
+    hap_set_setup_code("111-22-333");
+    hap_set_setup_id("ES32");
+    app_hap_setup_payload("111-22-333", "ES32", false, cfg.cid);
 
     /* Initialize Wi-Fi */
     app_wifi_init();
@@ -205,6 +177,24 @@ static void plug_thread_entry(void *arg)
 plug_err:
     hap_acc_delete(accessory);
     vTaskDelete(NULL);
+    ESP_LOGI(TAG, "reached point plug_err");
+}
+
+void plug_init(void)
+{
+    ESP_LOGI(TAG, "Dummy Driver Init.");
+}
+
+/**
+ * @brief turn on/off the lowlevel plug
+ */
+int plug_set_on(bool value)
+{
+    ESP_LOGI(TAG, "plug_set_on : %s", value == true ? "true" : "false");
+    setLED(value);      // LED toggle
+    setRelay(value);    // Relay toggle
+    ESP_LOGI(TAG, "toggled, state=%d", value);
+    return 0;
 }
 
 void homekit_start()
