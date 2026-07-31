@@ -16,16 +16,23 @@ The ESP32-C3 connects directly to the home WiFi network and implements the HomeK
 - **Connectors:** 5.08mm pitch screw terminals for mains in/out
 - Custom PCB (KiCad), hand-solderable THT components throughout
 
-## Firmware Stack
+## Firmware
 
 - **Toolchain:** PlatformIO, `framework = espidf`
 - **Application logic:** plain ESP-IDF C — GPIO config, debounced button input, LED/relay control
 - **HomeKit layer:** `esp-homekit-sdk` (Espressif's open-source HAP implementation), added as an ESP-IDF component
 - WiFi credentials configured via `idf.py menuconfig` (hardcoded); HomeKit pairing done separately after WiFi connects via the HomeKit setup code
 
-## Setup / Dependencies:
+## Setup
 
-- Install the `PlatformIO` extension in VSCode
+- `git clone git@github.com:mempb/ESP32-SmartPlug.git`
+- Install `PlatformIO` VSCode extension
+- WiFi SSID & password: 
+    - Option A: `pio run -t menuconfig` → App Wi-Fi → Source of Wi-Fi Credentials → Use Hardcoded → set SSID and password
+    - Option B: edit `sdkconfig.esp32-c3-devkitm-1`:
+      - `CONFIG_APP_WIFI_SSID="SSID"`
+      - `CONFIG_APP_WIFI_PASSWORD="pass"`
+- Build/flash: `pio run -t upload -t monitor`
 
 ## Roadmap
 
@@ -43,7 +50,7 @@ The ESP32-C3 connects directly to the home WiFi network and implements the HomeK
 ```
 /pcb        KiCad project
 /src        ESP-IDF source
-/docs       Schematics, picutes, etc. (TODO)
+/docs       Schematics, pictures, etc. (TODO)
 /housing    3D print housing design (TODO)
 ```
 
