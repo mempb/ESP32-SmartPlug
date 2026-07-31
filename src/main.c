@@ -15,6 +15,9 @@ static const char *TAG = "smartplug";
 
 void init()
 {
+    // Relay
+    gpio_set_direction(RELAY_PIN, GPIO_MODE_OUTPUT);
+
     // LED
     gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
 
@@ -28,6 +31,13 @@ void init()
 void setLED(int led)
 {
     gpio_set_level(LED_PIN, led);
+}
+
+// pass 0 for relay open
+// pass 1 for relay closed
+void setRelay(int relay)
+{
+    gpio_set_level(RELAY_PIN, relay);
 }
 
 // return 0 if button not pressed
@@ -51,8 +61,9 @@ void app_main(void)
 {
     init();
 
-    int ledState = 0;
-    setLED(ledState);   // Start with LED off
+    int state = 0;
+    setLED(state);   // Start with LED off
+    setRelay(state); // Start with relay open
 
     int lastRawReading = 0;      // last raw pin read
     int debouncedState = 0;      // confirmed, stable state
@@ -77,9 +88,10 @@ void app_main(void)
                 // Only toggle on the press edge (0 -> 1), not release
                 if (debouncedState == 1)
                 {
-                    ledState = !ledState;
-                    setLED(ledState);
-                    ESP_LOGI(TAG, "toggled, ledState=%d", ledState);
+                    state = !state;
+                    setLED(state);      // LED toggle
+                    setRelay(state);    // Relay toggle
+                    ESP_LOGI(TAG, "toggled, state=%d", state);
                 }
             }
         }

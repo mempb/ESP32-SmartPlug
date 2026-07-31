@@ -2859,7 +2859,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 130.81) (xy 116.84 130.81)
+			(xy 128.27 130.81) (xy 119.38 130.81)
 		)
 		(stroke
 			(width 0)
@@ -3029,16 +3029,6 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 135.89) (xy 165.1 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a4dfc6fa-e10e-4d52-8ac7-11fa4991e655")
-	)
-	(wire
-		(pts
 			(xy 168.91 71.12) (xy 168.91 107.95)
 		)
 		(stroke
@@ -3086,16 +3076,6 @@
 			(type default)
 		)
 		(uuid "b83b214f-c1df-4f9e-8175-b4b45006a0ce")
-	)
-	(wire
-		(pts
-			(xy 170.18 66.04) (xy 170.18 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c548d4fe-5d4d-4087-bc94-8f364740010c")
 	)
 	(wire
 		(pts
@@ -3156,16 +3136,6 @@
 			(type default)
 		)
 		(uuid "e7625575-80e9-44e2-8f89-685593a9a322")
-	)
-	(wire
-		(pts
-			(xy 156.21 66.04) (xy 170.18 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fd01e566-6fa7-4c08-867a-e084b3e4cdf5")
 	)
 	(symbol
 		(lib_id "SRD-05VDC-SL-C:SRD-05VDC-SL-C")
@@ -3525,6 +3495,85 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 165.1 135.89 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "32d5d064-9f3b-48d7-82f3-1d70524cb6e8")
+		(property "Reference" "#PWR04"
+			(at 171.45 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 168.5762 135.8899 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 165.1 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 165.1 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 165.1 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9f2b71d4-02fa-4371-a89c-be14890c0375")
+		)
+		(instances
+			(project "smartPlug-PCB"
+				(path "/807b7313-a2e5-4ef1-ac87-c4d49ba477c3"
+					(reference "#PWR04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Converter_ACDC:HLK-PM01")
 		(at 146.05 63.5 0)
 		(unit 1)
@@ -3720,7 +3769,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 111.76 130.81 0)
+		(at 114.3 130.81 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3731,7 +3780,7 @@
 		(fields_autoplaced yes)
 		(uuid "494ab73c-4cb0-443f-a3dc-7d818b6dc28d")
 		(property "Reference" "SW2"
-			(at 111.76 123.19 0)
+			(at 114.3 123.19 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3741,7 +3790,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 111.76 125.73 0)
+			(at 114.3 125.73 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3751,7 +3800,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
-			(at 111.76 125.73 0)
+			(at 114.3 125.73 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3762,7 +3811,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 111.76 125.73 0)
+			(at 114.3 125.73 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3773,7 +3822,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 111.76 130.81 0)
+			(at 114.3 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3821,7 +3870,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Screw_Terminal_01x02"
+		(property "Value" "Screw_Terminal_01x02-MainOut"
 			(at 186.69 63.4999 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4371,6 +4420,85 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 156.21 66.04 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "94359fc6-858c-4d2d-96ff-9837ea616adb")
+		(property "Reference" "#PWR05"
+			(at 162.56 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 159.6862 66.0399 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 156.21 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 156.21 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 156.21 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b65c29e4-46ab-4ac0-82af-9476792b826a")
+		)
+		(instances
+			(project "smartPlug-PCB"
+				(path "/807b7313-a2e5-4ef1-ac87-c4d49ba477c3"
+					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4007")
 		(at 133.35 85.09 270)
 		(unit 1)
@@ -4475,7 +4603,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 106.68 130.81 270)
+		(at 109.22 130.81 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4486,7 +4614,7 @@
 		(fields_autoplaced yes)
 		(uuid "a9195567-2de2-4221-adea-b47eccc90044")
 		(property "Reference" "#PWR03"
-			(at 100.33 130.81 0)
+			(at 102.87 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4497,7 +4625,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 102.87 130.8099 90)
+			(at 105.41 130.8099 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4508,7 +4636,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 106.68 130.81 0)
+			(at 109.22 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4519,7 +4647,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 106.68 130.81 0)
+			(at 109.22 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4530,7 +4658,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 106.68 130.81 0)
+			(at 109.22 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4666,7 +4794,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Screw_Terminal_01x02"
+		(property "Value" "Screw_Terminal_01x02-MainIn"
 			(at 111.76 63.4999 0)
 			(show_name no)
 			(do_not_autoplace no)
