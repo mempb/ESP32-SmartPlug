@@ -25,7 +25,7 @@ The ESP32-C3 connects directly to the home WiFi network and implements the HomeK
 
 ## Setup
 
-- `git clone git@github.com:mempb/ESP32-SmartPlug.git`
+- `git clone --recursive git@github.com:mempb/ESP32-SmartPlug.git`
 - Install `PlatformIO` VSCode extension
 - WiFi SSID & password: 
     - Option A: `pio run -t menuconfig` → App Wi-Fi → Source of Wi-Fi Credentials → Use Hardcoded → set SSID and password
