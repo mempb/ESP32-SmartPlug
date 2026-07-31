@@ -4,7 +4,7 @@
 #include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-
+#include "homekit.h"
 
 #define RELAY_PIN   0
 #define LED_PIN     1

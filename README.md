@@ -23,11 +23,18 @@ The ESP32-C3 connects directly to the home WiFi network and implements the HomeK
 - **HomeKit layer:** `esp-homekit-sdk` (Espressif's open-source HAP implementation), added as an ESP-IDF component
 - WiFi credentials configured via `idf.py menuconfig` (hardcoded); HomeKit pairing done separately after WiFi connects via the HomeKit setup code
 
+## Setup / Dependencies:
+
+- Install the `PlatformIO` extension in VSCode
+- Clone the `esp-homekit-sdk` repo:
+```
+git clone --recursive https://github.com/espressif/esp-homekit-sdk.git
+```
+
 ## Roadmap
 
 - [x] Schematic design
-- [x] PCB layout and routing
-- [x] PCB ordered
+- [x] PCB layout and routing, order
 - [x] PCB assembly (hand soldering)
 - [X] GPIO firmware: button input, debounce, LED toggle
 - [ ] HomeKit firmware (esp-homekit-sdk integration, relay control, button + LED sync)

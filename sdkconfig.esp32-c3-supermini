@@ -3286,6 +3286,13 @@ CONFIG_WL_SECTOR_SIZE_4096=y
 # default:
 CONFIG_WL_SECTOR_SIZE=4096
 # end of Wear Levelling
+
+#
+# Button
+#
+# default:
+CONFIG_IO_GLITCH_FILTER_TIME_MS=50
+# end of Button
 # end of Component config
 
 # default:
