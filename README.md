@@ -37,8 +37,10 @@ The ESP32-C3 connects directly to the home WiFi network and implements the HomeK
 ## Repo Structure
 
 ```
-/pcb   KiCad project, housing design
-/src   ESP-IDF source
+/pcb        KiCad project
+/src        ESP-IDF source
+/docs       Schematics, picutes, etc. (TODO)
+/housing    3D print housing design (TODO)
 ```
 
 ## References
