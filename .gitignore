@@ -1,3 +1,4 @@
-.pio
+.pio/
 .vscode/
 pcb/.history
+managed_components/
