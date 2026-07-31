@@ -3,7 +3,6 @@
 
 void homekit_start(void);
 void plug_init(void);
-void plug_deinit(void);
 int plug_set_on(bool value);
 
 // Hardware control — defined in main.c

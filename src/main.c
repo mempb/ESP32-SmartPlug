@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "driver/gpio.h"
 #include "esp_log.h"
 #include "esp_timer.h"
@@ -31,16 +30,14 @@ void init()
     ESP_LOGI(TAG, "Homekit initialized");
 }
 
-// pass 0 for LED off / relay closed
-// pass 1 for LED on / relay open
+// pass 0 for LED off / relay closed, 1 for LED on / relay open
 void setState(bool state)
 {
     gpio_set_level(RELAY_PIN, state);
     gpio_set_level(LED_PIN, !state);    // onboard LED inverted
 }
 
-// return 0 if button not pressed
-// return 1 if button pressed
+// return 0 if button not pressed, 1 if button pressed
 int checkBtn()
 {
     int btnState = gpio_get_level(BTN_PIN);
