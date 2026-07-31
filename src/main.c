@@ -8,44 +8,35 @@
 #include "homekit.h"
 
 #define RELAY_PIN   0
-#define LED_PIN     1
 #define BTN_PIN     2
+#define LED_PIN     8       // ESP32-C3 onboard LED
 #define DEBOUNCE_US 20000
 
-static const char *TAG = "smartplug";
+static const char *TAG = "ESP32-SmartPlug";
 
 void init()
 {
-    // === Intialize GPIOs === //
+    // === Init GPIOs === //
     // Relay
     gpio_set_direction(RELAY_PIN, GPIO_MODE_OUTPUT);
-
     // LED
     gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
-
     // Button
     gpio_set_direction(BTN_PIN, GPIO_MODE_INPUT);
     gpio_set_pull_mode(BTN_PIN, GPIO_PULLUP_ONLY);
-
     ESP_LOGI(TAG, "GPIOs initialized");
 
-    // === Start Homekit === //
+    // === Init Homekit === //
     homekit_start();
     ESP_LOGI(TAG, "Homekit initialized");
 }
 
-// pass 0 for LED off
-// pass 1 for LED on
-void setLED(int led)
+// pass 0 for LED off / relay closed
+// pass 1 for LED on / relay open
+void setState(bool state)
 {
-    gpio_set_level(LED_PIN, led);
-}
-
-// pass 0 for relay open
-// pass 1 for relay closed
-void setRelay(int relay)
-{
-    gpio_set_level(RELAY_PIN, relay);
+    gpio_set_level(RELAY_PIN, state);
+    gpio_set_level(LED_PIN, !state);    // onboard LED inverted
 }
 
 // return 0 if button not pressed
@@ -78,9 +69,8 @@ void app_main(void)
 
     init();
 
-    int state = 0;
-    setLED(state);   // Start with LED off
-    setRelay(state); // Start with relay open
+    int plugState = 0;
+    setState(plugState);         // Start with LED off / relay open
 
     int lastRawReading = 0;      // last raw pin read
     int debouncedState = 0;      // confirmed, stable state
@@ -89,13 +79,11 @@ void app_main(void)
     while (1)
     {
         int rawReading = checkBtn();  // read ONCE per loop
-
         if (rawReading != lastRawReading)
         {
             lastChangeTime = esp_timer_get_time();
             lastRawReading = rawReading;
         }
-
         if ((esp_timer_get_time() - lastChangeTime) > DEBOUNCE_US)
         {
             if (rawReading != debouncedState)
@@ -105,12 +93,11 @@ void app_main(void)
                 // Only toggle on the press edge (0 -> 1), not release
                 if (debouncedState == 1)
                 {
-                    state = !state;
-                    plug_set_on(state);
+                    plugState = !plugState;
+                    plug_set_on(plugState);
                 }
             }
         }
-
         vTaskDelay(pdMS_TO_TICKS(20));
     }
 }

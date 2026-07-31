@@ -537,41 +537,42 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:LED"
+		(symbol "Device:C_Polarized"
 			(pin_numbers
 				(hide yes)
 			)
 			(pin_names
-				(offset 1.016)
-				(hide yes)
+				(offset 0.254)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "D"
-				(at 0 2.54 0)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
-			(property "Value" "LED"
-				(at 0 -2.54 0)
+			(property "Value" "C_Polarized"
+				(at 0.635 -2.54 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
 			(property "Footprint" ""
-				(at 0 0 0)
+				(at 0.9652 -3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -592,7 +593,7 @@
 					)
 				)
 			)
-			(property "Description" "Light emitting diode"
+			(property "Description" "Polarized capacitor"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -603,7 +604,7 @@
 					)
 				)
 			)
-			(property "Sim.Pins" "1=K 2=A"
+			(property "ki_keywords" "cap capacitor"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -614,7 +615,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "LED diode"
+			(property "ki_fp_filters" "CP_*"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -625,21 +626,21 @@
 					)
 				)
 			)
-			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
+			(symbol "C_Polarized_0_1"
+				(rectangle
+					(start -2.286 0.508)
+					(end 2.286 1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
 					)
 				)
-			)
-			(symbol "LED_0_1"
 				(polyline
 					(pts
-						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
+						(xy -1.778 2.286) (xy -0.762 2.286)
 					)
 					(stroke
 						(width 0)
@@ -651,7 +652,7 @@
 				)
 				(polyline
 					(pts
-						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
+						(xy -1.27 2.794) (xy -1.27 1.778)
 					)
 					(stroke
 						(width 0)
@@ -661,48 +662,23 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy -1.27 0) (xy 1.27 0)
-					)
+				(rectangle
+					(start 2.286 -0.508)
+					(end -2.286 -1.016)
 					(stroke
 						(width 0)
 						(type default)
 					)
 					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 -1.27) (xy -1.27 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
+						(type outline)
 					)
 				)
 			)
-			(symbol "LED_1_1"
+			(symbol "C_Polarized_1_1"
 				(pin passive line
-					(at -3.81 0 0)
-					(length 2.54)
-					(name "K"
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -718,9 +694,9 @@
 					)
 				)
 				(pin passive line
-					(at 3.81 0 180)
-					(length 2.54)
-					(name "A"
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2728,6 +2704,12 @@
 		(uuid "19886fac-4dc9-4340-9dc9-153727742754")
 	)
 	(junction
+		(at 168.91 107.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2162c506-3ca1-4119-91cb-019dbce358b7")
+	)
+	(junction
 		(at 127 99.06)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2859,7 +2841,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 130.81) (xy 119.38 130.81)
+			(xy 120.65 120.65) (xy 129.54 120.65)
 		)
 		(stroke
 			(width 0)
@@ -2949,16 +2931,6 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 118.11) (xy 129.54 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6f21ee73-da19-4760-a763-b9c1ec1afea4")
-	)
-	(wire
-		(pts
 			(xy 158.75 52.07) (xy 135.89 52.07)
 		)
 		(stroke
@@ -2976,16 +2948,6 @@
 			(type default)
 		)
 		(uuid "72ad9d8e-54ba-4050-8e61-227ad8b03026")
-	)
-	(wire
-		(pts
-			(xy 128.27 120.65) (xy 128.27 130.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "740e7c30-7bd7-4e10-bdfa-45e1b3a04c94")
 	)
 	(wire
 		(pts
@@ -3026,6 +2988,16 @@
 			(type default)
 		)
 		(uuid "991528dd-3b0a-42b1-81ff-49cce17ef10f")
+	)
+	(wire
+		(pts
+			(xy 179.07 107.95) (xy 168.91 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2d6d68f-8277-497b-90e0-11ad91344d6b")
 	)
 	(wire
 		(pts
@@ -3109,13 +3081,13 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 120.65) (xy 128.27 120.65)
+			(xy 179.07 115.57) (xy 179.07 116.84)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "df5c3d43-875f-4811-9b18-1173897e8af0")
+		(uuid "dc0796ea-c72b-4f97-a0a7-6f1af3f048dc")
 	)
 	(wire
 		(pts
@@ -3331,85 +3303,6 @@
 			(project "smartPlug-PCB"
 				(path "/807b7313-a2e5-4ef1-ac87-c4d49ba477c3"
 					(reference "K1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 109.22 118.11 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "212bac4b-d0dd-464b-a99e-3c4d945ca22e")
-		(property "Reference" "#PWR02"
-			(at 102.87 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 105.41 118.1099 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 109.22 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 109.22 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 109.22 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c57c1ab3-8928-4d20-b876-dcc2b7202fdb")
-		)
-		(instances
-			(project "smartPlug-PCB"
-				(path "/807b7313-a2e5-4ef1-ac87-c4d49ba477c3"
-					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -3769,7 +3662,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 114.3 130.81 0)
+		(at 115.57 120.65 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3780,7 +3673,7 @@
 		(fields_autoplaced yes)
 		(uuid "494ab73c-4cb0-443f-a3dc-7d818b6dc28d")
 		(property "Reference" "SW2"
-			(at 114.3 123.19 0)
+			(at 115.57 113.03 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3790,7 +3683,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 114.3 125.73 0)
+			(at 115.57 115.57 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3800,7 +3693,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
-			(at 114.3 125.73 0)
+			(at 115.57 115.57 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3811,7 +3704,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 114.3 125.73 0)
+			(at 115.57 115.57 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3822,7 +3715,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 114.3 130.81 0)
+			(at 115.57 120.65 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4602,8 +4495,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 109.22 130.81 270)
+		(lib_id "Device:C_Polarized")
+		(at 179.07 111.76 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4612,31 +4505,31 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "a9195567-2de2-4221-adea-b47eccc90044")
-		(property "Reference" "#PWR03"
-			(at 102.87 130.81 0)
-			(hide yes)
+		(uuid "a3756061-6463-423b-a9eb-ff88398ef7bb")
+		(property "Reference" "C1"
+			(at 182.88 109.6009 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Value" "GND"
-			(at 105.41 130.8099 90)
+		(property "Value" "470u"
+			(at 182.88 112.1409 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 109.22 130.81 0)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
+			(at 180.0352 115.57 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4647,7 +4540,89 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 109.22 130.81 0)
+			(at 179.07 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Polarized capacitor"
+			(at 179.07 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "25d2badd-f347-4abe-bc9f-7222a6b77a78")
+		)
+		(pin "1"
+			(uuid "8ef04e5e-f8e7-4f5e-b9fe-ce3f51c16db4")
+		)
+		(instances
+			(project "smartPlug-PCB"
+				(path "/807b7313-a2e5-4ef1-ac87-c4d49ba477c3"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 110.49 120.65 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a9195567-2de2-4221-adea-b47eccc90044")
+		(property "Reference" "#PWR03"
+			(at 104.14 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 106.68 120.6499 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 110.49 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 110.49 120.65 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4658,7 +4633,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 109.22 130.81 0)
+			(at 110.49 120.65 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4681,8 +4656,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:LED")
-		(at 113.03 118.11 0)
+		(lib_id "power:GND")
+		(at 179.07 116.84 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4691,9 +4666,10 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "cf2c3a63-de37-45e7-9335-87e265f48d0f")
-		(property "Reference" "D2"
-			(at 111.4425 111.76 0)
+		(uuid "cbcabda9-e087-4a20-853d-062ad8d1a821")
+		(property "Reference" "#PWR06"
+			(at 179.07 123.19 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4702,8 +4678,8 @@
 				)
 			)
 		)
-		(property "Value" "LED"
-			(at 111.4425 114.3 0)
+		(property "Value" "GND"
+			(at 179.07 121.92 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4712,8 +4688,8 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm"
-			(at 113.03 118.11 0)
+		(property "Footprint" ""
+			(at 179.07 116.84 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4724,7 +4700,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 113.03 118.11 0)
+			(at 179.07 116.84 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4734,8 +4710,8 @@
 				)
 			)
 		)
-		(property "Description" "Light emitting diode"
-			(at 113.03 118.11 0)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 179.07 116.84 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4744,28 +4720,14 @@
 					(size 1.27 1.27)
 				)
 			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 113.03 118.11 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "08fccdcf-aa97-4637-9ca9-087d91efb0ed")
 		)
 		(pin "1"
-			(uuid "df339027-62a3-496e-9377-901ade9b1995")
+			(uuid "0fe19a9c-a4da-4f52-8871-5414fe534e67")
 		)
 		(instances
 			(project "smartPlug-PCB"
 				(path "/807b7313-a2e5-4ef1-ac87-c4d49ba477c3"
-					(reference "D2")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)

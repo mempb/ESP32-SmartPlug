@@ -7,7 +7,6 @@ void plug_deinit(void);
 int plug_set_on(bool value);
 
 // Hardware control — defined in main.c
-void setLED(int led);
-void setRelay(int relay);
+void setState(bool state);
 
 #endif /* _HOMEKIT_H_ */

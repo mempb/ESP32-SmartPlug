@@ -185,14 +185,9 @@ void plug_init(void)
     ESP_LOGI(TAG, "Dummy Driver Init.");
 }
 
-/**
- * @brief turn on/off the lowlevel plug
- */
 int plug_set_on(bool value)
 {
-    ESP_LOGI(TAG, "plug_set_on : %s", value == true ? "true" : "false");
-    setLED(value);      // LED toggle
-    setRelay(value);    // Relay toggle
+    setState(value);      // state toggle
     ESP_LOGI(TAG, "toggled, state=%d", value);
     return 0;
 }

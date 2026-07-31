@@ -34,7 +34,7 @@ The ESP32-C3 connects directly to the home WiFi network and implements the HomeK
 - [x] PCB assembly (hand soldering)
 - [X] GPIO firmware: button input, debounce, LED toggle
 - [X] HomeKit firmware (esp-homekit-sdk integration, relay control, button + LED sync)
-- [ ] Respin PCB, order
+- [X] Respin PCB, order (smaller form factor, fix missing GND trace, add capacitor)
 - [ ] Enclosure design/print
 - [ ] Final writeup: build photos, schematics, wiring diagram, etc
 
