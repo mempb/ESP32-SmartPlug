@@ -11,8 +11,6 @@
 #define LED_PIN     8       // ESP32-C3 onboard LED
 #define DEBOUNCE_US 20000
 
-static const char *TAG = "ESP32-SmartPlug";
-
 void init()
 {
     // === Init GPIOs === //
@@ -23,77 +21,62 @@ void init()
     // Button
     gpio_set_direction(BTN_PIN, GPIO_MODE_INPUT);
     gpio_set_pull_mode(BTN_PIN, GPIO_PULLUP_ONLY);
-    ESP_LOGI(TAG, "GPIOs initialized");
 
     // === Init Homekit === //
     homekit_start();
-    ESP_LOGI(TAG, "Homekit initialized");
 }
 
 // pass 0 for LED off / relay closed, 1 for LED on / relay open
-void setState(bool state)
+void setIO(bool state)
 {
     gpio_set_level(RELAY_PIN, state);
     gpio_set_level(LED_PIN, !state);    // onboard LED inverted
 }
 
-// return 0 if button not pressed, 1 if button pressed
-int checkBtn()
+// returns the toggled plug state
+int checkBtnWithDebounce(int state)
 {
-    int btnState = gpio_get_level(BTN_PIN);
+    static int lastRawReading      = 0;        // last raw pin read
+    static int debouncedState      = 0;        // confirmed, stable state
+    static int64_t lastChangeTime  = 0;        // when raw reading last changed
 
-    if (!btnState)
+    int rawReading = gpio_get_level(BTN_PIN);
+
+    if (rawReading != lastRawReading)
     {
-        ESP_LOGI(TAG, "button pressed");
-        return 1;
+        lastChangeTime = esp_timer_get_time();
+        lastRawReading = rawReading;
     }
-    else
+    if ((esp_timer_get_time() - lastChangeTime) > DEBOUNCE_US)
     {
-        return 0;
+        if (rawReading != debouncedState)
+        {
+            debouncedState = rawReading;
+
+            // Only toggle on the press edge (0 -> 1), not release
+            if (debouncedState == 1)
+            {
+                state = !state;
+                return state;
+            }
+        }
     }
+    return state;
 }
 
 void app_main(void)
 {
-    ESP_LOGI(TAG, "Enter app_main");
-
-    esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-        ESP_ERROR_CHECK(nvs_flash_erase());
-        ret = nvs_flash_init();
-    }
-    ESP_ERROR_CHECK(ret);
-
     init();
 
     int plugState = 0;
-    setState(plugState);         // Start with LED off / relay open
-
-    int lastRawReading = 0;      // last raw pin read
-    int debouncedState = 0;      // confirmed, stable state
-    int64_t lastChangeTime = 0;  // when raw reading last changed
+    plug_set(plugState);    // Start with LED off / relay open
 
     while (1)
     {
-        int rawReading = checkBtn();  // read ONCE per loop
-        if (rawReading != lastRawReading)
+        if (checkBtnWithDebounce(plugState) != plugState)
         {
-            lastChangeTime = esp_timer_get_time();
-            lastRawReading = rawReading;
-        }
-        if ((esp_timer_get_time() - lastChangeTime) > DEBOUNCE_US)
-        {
-            if (rawReading != debouncedState)
-            {
-                debouncedState = rawReading;
-
-                // Only toggle on the press edge (0 -> 1), not release
-                if (debouncedState == 1)
-                {
-                    plugState = !plugState;
-                    plug_set_on(plugState);
-                }
-            }
+            plugState = !plugState;
+            plug_set(plugState);
         }
         vTaskDelay(pdMS_TO_TICKS(20));
     }

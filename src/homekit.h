@@ -2,10 +2,9 @@
 #define _HOMEKIT_H_
 
 void homekit_start(void);
-void plug_init(void);
-int plug_set_on(bool value);
+int plug_set(bool value);
 
 // Hardware control — defined in main.c
-void setState(bool state);
+void setIO(bool state);
 
 #endif /* _HOMEKIT_H_ */

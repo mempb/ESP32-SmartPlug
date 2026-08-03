@@ -20,6 +20,8 @@ static const char *TAG = "ESP32-SmartPlug";
 #define RESET_TO_FACTORY_BUTTON_TIMEOUT     10
 #define RESET_GPIO  GPIO_NUM_10
 
+static hap_char_t *on_char;
+
 static void reset_network_handler(void* arg)
 {
     hap_reset_network();
@@ -52,7 +54,7 @@ static int plug_write(hap_write_data_t write_data[], int count, void *serv_priv,
         *(write->status) = HAP_STATUS_VAL_INVALID;
         if (!strcmp(hap_char_get_type_uuid(write->hc), HAP_CHAR_UUID_ON)) {
             ESP_LOGI(TAG, "Received Write for Plug %s", write->val.b ? "On" : "Off");
-            if (plug_set_on(write->val.b) == 0) {
+            if (plug_set(write->val.b) == 0) {
                 *(write->status) = HAP_STATUS_SUCCESS;
             }
         } else {
@@ -101,6 +103,8 @@ static void plug_thread_entry(void *arg)
         goto plug_err;
     }
 
+    on_char = hap_serv_get_char_by_uuid(service, HAP_CHAR_UUID_ON);
+
     int ret = hap_serv_add_char(service, hap_char_name_create("My Plug"));
     
     if (ret != HAP_SUCCESS) {
@@ -112,7 +116,6 @@ static void plug_thread_entry(void *arg)
     hap_acc_add_serv(accessory, service);
     hap_add_accessory(accessory);
     ESP_LOGI(TAG, "reached point add");
-    plug_init();
     reset_key_init(RESET_GPIO);
     hap_set_setup_code("111-22-333");
     hap_set_setup_id("ES32");
@@ -129,15 +132,16 @@ plug_err:
     ESP_LOGI(TAG, "reached point plug_err");
 }
 
-void plug_init(void)
+int plug_set(bool value)
 {
-    ESP_LOGI(TAG, "Dummy Driver Init.");
-}
-
-int plug_set_on(bool value)
-{
-    setState(value);      // state toggle
+    setIO(value);      // state toggle
     ESP_LOGI(TAG, "toggled, state=%d", value);
+
+    // Update HomeKit state
+    if (on_char) {
+        hap_val_t new_val = { .b = value };
+        hap_char_update_val(on_char, &new_val);
+    }
     return 0;
 }
 
